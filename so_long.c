@@ -6,7 +6,7 @@
 /*   By: ssadi-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:06:02 by ssadi-ou          #+#    #+#             */
-/*   Updated: 2025/04/14 02:49:45 by ssadi-ou         ###   ########.fr       */
+/*   Updated: 2025/04/14 03:34:03 by ssadi-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct s_data
 	t_player 	player;
 	char		**tab;
 	int		collect;
+	int		P;
+	int		E;
 }t_data;
 
 int	move(int keycode, t_data *data)
@@ -192,6 +194,8 @@ void	initmlx(char **av)
                 free(line);
                 hauteur += 64;
         }
+	if (hauteur == longueur)
+		return;
 	printf("%i\n", longueur);
 	printf("%i\n", hauteur);
 	data.mlx = mlx_init();
@@ -214,6 +218,8 @@ void	initmlx(char **av)
         (data.tab)[j] = 0;
 	j = 0;
 	data.collect = 0;
+	data.P = 0;
+	data.E = 0;
 	while (1)
 	{
 		i = 0;
@@ -225,21 +231,27 @@ void	initmlx(char **av)
 		{
 			if (line[i] == '1')
 				mlx_put_image_to_window(data.mlx, data.win, data.bedrock.img_bedrock, longueur, hauteur);
-			if (line[i] == '0')
+			else if (line[i] == '0')
 				mlx_put_image_to_window(data.mlx, data.win, data.dirt.img_dirt, longueur, hauteur);
-			if (line[i] == 'C')
+			else if (line[i] == 'C')
 			{
 				data.collect += 1;
 				mlx_put_image_to_window(data.mlx, data.win, data.diamond.img_diamond, longueur, hauteur);
 			}
-			if (line[i] == 'P')
+			else if (line[i] == 'P')
 			{
 				player.x = i;
 				player.y = j;
+				data.P += 1;
 				mlx_put_image_to_window(data.mlx, data.win, data.steve.img_steve, longueur, hauteur);
 			}
-			if (line[i] == 'E')
+			else if (line[i] == 'E')
+			{
+				data.E += 1;
 				mlx_put_image_to_window(data.mlx, data.win, data.portal.img_portal, longueur, hauteur);
+			}
+			else
+				return;
 			(data.tab)[j][i] = line[i];
 			i++;
 			longueur += 64;
@@ -250,6 +262,8 @@ void	initmlx(char **av)
 		longueur = 0;
 		hauteur += 64;
 	}
+	if ((data.P) > 1 || (data.P) == 0 || (data.E) > 1 || (data.E) == 0 || data.collect < 1)
+		return;
 	printf("%i\n", data.collect);
 	data.player = player;
 	print_tab(data.tab);

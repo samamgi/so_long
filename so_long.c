@@ -6,7 +6,7 @@
 /*   By: ssadi-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 19:06:02 by ssadi-ou          #+#    #+#             */
-/*   Updated: 2025/04/14 03:34:03 by ssadi-ou         ###   ########.fr       */
+/*   Updated: 2025/04/14 05:27:36 by ssadi-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,21 @@ void	print_tab(char **str)
 	}
 }
 
+int	check_map(char **tab, t_data data, int y_max)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if ((ft_strchr(tab[0], '1') == 1) || (ft_strchr(tab[y_max], '1') == 1))
+			return(-1);
+	if ((data.P) > 1 || (data.P) == 0 || (data.E) > 1 || (data.E) == 0 || data.collect < 1)
+			return(-1);
+	return (1);
+}
+
+
 void	initmlx(char **av)
 {
 	int	i;
@@ -262,7 +277,7 @@ void	initmlx(char **av)
 		longueur = 0;
 		hauteur += 64;
 	}
-	if ((data.P) > 1 || (data.P) == 0 || (data.E) > 1 || (data.E) == 0 || data.collect < 1)
+	if (check_map(data.tab, data, (j - 1)) == -1)
 		return;
 	printf("%i\n", data.collect);
 	data.player = player;

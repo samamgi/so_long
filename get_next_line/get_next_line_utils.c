@@ -73,7 +73,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	j = -1;
 	if (!s1)
 		return (ft_strdup_gnl(s2));
-	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2)
+				+ 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;

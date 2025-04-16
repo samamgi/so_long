@@ -321,7 +321,7 @@ int	check_map(char **tab, t_data *data, int y_max)
 	i = 0;
 	if ((ft_strchr(tab[0], '1') == 1) || (ft_strchr(tab[y_max], '1') == 1))
 		return (-5);
-	if ((data->p) > 1 || (data->p) == 0 || (data->p) > 1 || (data->p) == 0
+	if ((data->p) > 1 || (data->p) == 0 || (data->e) > 1 || (data->e) == 0
 		|| data->collect < 1)
 	{
 		if ((data->p) > 1 || (data->e) > 1)

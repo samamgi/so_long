@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssadi-ou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 19:26:08 by ssadi-ou          #+#    #+#             */
-/*   Updated: 2025/04/11 19:27:52 by ssadi-ou         ###   ########.fr       */
+/*   Created: 2025/04/11 19:06:02 by ssadi-ou          #+#    #+#             */
+/*   Updated: 2025/04/17 02:12:27 by ssadi-ou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "../inc/so_long.h"
 
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+int	main(int ac, char **av)
+{
+	if (ac == 2)
+	{
+		if (ft_strlen(av[1]) == 0)
+		{
+			ft_putendl_fd("Error: No such file or directory", 2);
+			return (0);
+		}
+		if (check_ber(av) == -1)
+			return (0);
+		initmlx(av);
+	}
+	else
+		ft_putendl_fd("Error: Invalid Args !", 2);
+	return (0);
+}

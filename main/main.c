@@ -12,8 +12,10 @@
 
 #include "../inc/so_long.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
+	if (!env[0])
+		return (0);
 	if (ac == 2)
 	{
 		if (ft_strlen(av[1]) == 0)
